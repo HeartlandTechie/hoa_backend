@@ -34,6 +34,15 @@
                                 {{ trans('cruds.sticker.fields.address') }}
                             </th>
                             <th>
+                                {{ trans('cruds.address.fields.street_address') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.address.fields.street_name') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.address.fields.lot_number') }}
+                            </th>
+                            <th>
                                 {{ trans('cruds.sticker.fields.boat') }}
                             </th>
                             <th>
@@ -61,6 +70,15 @@
                                 </td>
                                 <td>
                                     {{ $sticker->address->address ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $sticker->address->street_address ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $sticker->address->street_name ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $sticker->address->lot_number ?? '' }}
                                 </td>
                                 <td>
                                     {{ $sticker->boat->type ?? '' }}

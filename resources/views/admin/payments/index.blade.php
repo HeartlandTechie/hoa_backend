@@ -29,6 +29,15 @@
                             {{ trans('cruds.payment.fields.address') }}
                         </th>
                         <th>
+                            {{ trans('cruds.address.fields.street_address') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.address.fields.street_name') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.address.fields.lot_number') }}
+                        </th>
+                        <th>
                             {{ trans('cruds.payment.fields.year') }}
                         </th>
                         <th>
@@ -50,6 +59,15 @@
                             </td>
                             <td>
                                 {{ $payment->address->address ?? '' }}
+                            </td>
+                            <td>
+                                {{ $payment->address->street_address ?? '' }}
+                            </td>
+                            <td>
+                                {{ $payment->address->street_name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $payment->address->lot_number ?? '' }}
                             </td>
                             <td>
                                 {{ $payment->year ?? '' }}
