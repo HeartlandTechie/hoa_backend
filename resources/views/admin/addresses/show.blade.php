@@ -31,6 +31,46 @@
                             {{ $address->address }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.address.fields.street_address') }}
+                        </th>
+                        <td>
+                            {{ $address->street_address }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.address.fields.street_name') }}
+                        </th>
+                        <td>
+                            {{ $address->street_name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.address.fields.lot_number') }}
+                        </th>
+                        <td>
+                            {{ $address->lot_number }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.address.fields.rental_flag') }}
+                        </th>
+                        <td>
+                            <input type="checkbox" disabled="disabled" {{ $address->rental_flag ? 'checked' : '' }}>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.address.fields.rental_owner') }}
+                        </th>
+                        <td>
+                            {{ $address->rental_owner->name ?? '' }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">

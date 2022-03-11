@@ -33,6 +33,21 @@
                             {{ trans('cruds.address.fields.address') }}
                         </th>
                         <th>
+                            {{ trans('cruds.address.fields.street_address') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.address.fields.street_name') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.address.fields.lot_number') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.address.fields.rental_flag') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.address.fields.rental_owner') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -48,6 +63,22 @@
                             </td>
                             <td>
                                 {{ $address->address ?? '' }}
+                            </td>
+                            <td>
+                                {{ $address->street_address ?? '' }}
+                            </td>
+                            <td>
+                                {{ $address->street_name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $address->lot_number ?? '' }}
+                            </td>
+                            <td>
+                                <span style="display:none">{{ $address->rental_flag ?? '' }}</span>
+                                <input type="checkbox" disabled="disabled" {{ $address->rental_flag ? 'checked' : '' }}>
+                            </td>
+                            <td>
+                                {{ $address->rental_owner->name ?? '' }}
                             </td>
                             <td>
                                 @can('address_show')
