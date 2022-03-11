@@ -30,7 +30,7 @@ class UsersController extends Controller
 
         $roles = Role::pluck('title', 'id');
 
-        $addresses = Address::pluck('address', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $addresses = Address::pluck('street_address', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         return view('admin.users.create', compact('addresses', 'roles'));
     }
@@ -49,7 +49,7 @@ class UsersController extends Controller
 
         $roles = Role::pluck('title', 'id');
 
-        $addresses = Address::pluck('address', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $addresses = Address::pluck('street_address', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $user->load('roles', 'address');
 

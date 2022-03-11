@@ -41,6 +41,12 @@
                             {{ trans('cruds.user.fields.address') }}
                         </th>
                         <th>
+                            {{ trans('cruds.address.fields.street_name') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.address.fields.lot_number') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -69,7 +75,13 @@
                                 @endforeach
                             </td>
                             <td>
-                                {{ $user->address->address ?? '' }}
+                                {{ $user->address->street_address ?? '' }}
+                            </td>
+                            <td>
+                                {{ $user->address->street_name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $user->address->lot_number ?? '' }}
                             </td>
                             <td>
                                 @can('user_show')
