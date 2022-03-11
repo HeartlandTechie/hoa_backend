@@ -22,6 +22,11 @@ class Address extends Model
 
     protected $fillable = [
         'address',
+        'street_address',
+        'street_name',
+        'lot_number',
+        'rental_flag',
+        'rental_owner_id',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -40,6 +45,11 @@ class Address extends Model
     public function addressBoats()
     {
         return $this->belongsToMany(Boat::class);
+    }
+
+    public function rental_owner()
+    {
+        return $this->belongsTo(User::class, 'rental_owner_id');
     }
 
     protected function serializeDate(DateTimeInterface $date)

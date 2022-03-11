@@ -21,6 +21,18 @@ class StoreAddressRequest extends FormRequest
                 'string',
                 'nullable',
             ],
+            'street_address' => [
+                'string',
+                'nullable',
+            ],
+            'street_name' => [
+                'string',
+                'nullable',
+            ],
+            'lot_number' => [
+                'string',
+                'nullable',
+            ],
         ];
     }
 }
