@@ -6,6 +6,8 @@ use \DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+
 
 class Address extends Model
 {
@@ -21,7 +23,7 @@ class Address extends Model
     ];
 
     protected $fillable = [
-        'address',
+        
         'street_address',
         'street_name',
         'lot_number',
@@ -31,6 +33,17 @@ class Address extends Model
         'updated_at',
         'deleted_at',
     ];
+
+    protected function address(): Attribute
+    {
+        
+       
+        return Attribute::make(
+           
+            get: fn ($value) => $this->street_address . " " . $this->street_name,
+            //set: fn ($value) => strtolower($value),
+        );
+    }
 
     public function addressUsers()
     {
