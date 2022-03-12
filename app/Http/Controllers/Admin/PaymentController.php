@@ -27,7 +27,7 @@ class PaymentController extends Controller
     {
         abort_if(Gate::denies('payment_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $addresses = Address::pluck('address', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $addresses = Address::get()->pluck('address', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         return view('admin.payments.create', compact('addresses'));
     }
@@ -43,7 +43,7 @@ class PaymentController extends Controller
     {
         abort_if(Gate::denies('payment_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $addresses = Address::pluck('address', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $addresses = Address::get()->pluck('address', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $payment->load('address');
 
