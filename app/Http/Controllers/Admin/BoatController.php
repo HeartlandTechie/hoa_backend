@@ -27,7 +27,7 @@ class BoatController extends Controller
     {
         abort_if(Gate::denies('boat_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $addresses = Address::pluck('address', 'id');
+        $addresses = Address::get()->pluck('address', 'id');
 
         return view('admin.boats.create', compact('addresses'));
     }
@@ -44,7 +44,7 @@ class BoatController extends Controller
     {
         abort_if(Gate::denies('boat_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $addresses = Address::pluck('address', 'id');
+        $addresses = Address::get()->pluck('address', 'id');
 
         $boat->load('addresses');
 
