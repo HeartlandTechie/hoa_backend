@@ -27,7 +27,7 @@ class ReservationController extends Controller
     {
         abort_if(Gate::denies('reservation_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $addresses = Address::get()->pluck('address', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $addresses = Address::pluck('address', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         return view('admin.reservations.create', compact('addresses'));
     }
@@ -43,7 +43,7 @@ class ReservationController extends Controller
     {
         abort_if(Gate::denies('reservation_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $addresses = Address::get()->pluck('address', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $addresses = Address::pluck('address', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $reservation->load('address');
 

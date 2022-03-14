@@ -58,6 +58,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('minute-datas/media', 'MinuteDataController@storeMedia')->name('minute-datas.storeMedia');
     Route::post('minute-datas/ckmedia', 'MinuteDataController@storeCKEditorImages')->name('minute-datas.storeCKEditorImages');
     Route::resource('minute-datas', 'MinuteDataController');
+
+    // Todo
+    Route::delete('todos/destroy', 'TodoController@massDestroy')->name('todos.massDestroy');
+    Route::post('todos/parse-csv-import', 'TodoController@parseCsvImport')->name('todos.parseCsvImport');
+    Route::post('todos/process-csv-import', 'TodoController@processCsvImport')->name('todos.processCsvImport');
+    Route::resource('todos', 'TodoController');
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
     // Change password

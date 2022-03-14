@@ -96,7 +96,7 @@
                     </li>
                 @endcan
                 @can('site_specific_access')
-                    <li class="nav-item has-treeview {{ request()->is("admin/newsletters*") ? "menu-open" : "" }} {{ request()->is("admin/minute-datas*") ? "menu-open" : "" }}">
+                    <li class="nav-item has-treeview {{ request()->is("admin/newsletters*") ? "menu-open" : "" }} {{ request()->is("admin/minute-datas*") ? "menu-open" : "" }} {{ request()->is("admin/todos*") ? "menu-open" : "" }}">
                         <a class="nav-link nav-dropdown-toggle" href="#">
                             <i class="fa-fw nav-icon fas fa-cogs">
 
@@ -127,6 +127,18 @@
                                         </i>
                                         <p>
                                             {{ trans('cruds.minuteData.title') }}
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('todo_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.todos.index") }}" class="nav-link {{ request()->is("admin/todos") || request()->is("admin/todos/*") ? "active" : "" }}">
+                                        <i class="fa-fw nav-icon fas fa-check-circle">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.todo.title') }}
                                         </p>
                                     </a>
                                 </li>
