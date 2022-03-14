@@ -1,42 +1,42 @@
 @extends('layouts.admin')
 @section('content')
-@can('minute_data_create')
+@can('todo_create')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route('admin.minute-datas.create') }}">
-                {{ trans('global.add') }} {{ trans('cruds.minuteData.title_singular') }}
+            <a class="btn btn-success" href="{{ route('admin.todos.create') }}">
+                {{ trans('global.add') }} {{ trans('cruds.todo.title_singular') }}
             </a>
             <button class="btn btn-warning" data-toggle="modal" data-target="#csvImportModal">
                 {{ trans('global.app_csvImport') }}
             </button>
-            @include('csvImport.modal', ['model' => 'MinuteData', 'route' => 'admin.minute-datas.parseCsvImport'])
+            @include('csvImport.modal', ['model' => 'Todo', 'route' => 'admin.todos.parseCsvImport'])
         </div>
     </div>
 @endcan
 <div class="card">
     <div class="card-header">
-        {{ trans('cruds.minuteData.title_singular') }} {{ trans('global.list') }}
+        {{ trans('cruds.todo.title_singular') }} {{ trans('global.list') }}
     </div>
 
     <div class="card-body">
         <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable datatable-MinuteData">
+            <table class=" table table-bordered table-striped table-hover datatable datatable-Todo">
                 <thead>
                     <tr>
                         <th width="10">
 
                         </th>
                         <th>
-                            {{ trans('cruds.minuteData.fields.id') }}
+                            {{ trans('cruds.todo.fields.id') }}
                         </th>
                         <th>
-                            {{ trans('cruds.minuteData.fields.filename') }}
+                            {{ trans('cruds.todo.fields.complete') }}
                         </th>
                         <th>
-                            {{ trans('cruds.minuteData.fields.year_created') }}
+                            {{ trans('cruds.todo.fields.title') }}
                         </th>
                         <th>
-                            {{ trans('cruds.minuteData.fields.pdf_text') }}
+                            {{ trans('cruds.todo.fields.user') }}
                         </th>
                         <th>
                             &nbsp;
@@ -44,42 +44,39 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($minuteDatas as $key => $minuteData)
-                        <tr data-entry-id="{{ $minuteData->id }}">
+                    @foreach($todos as $key => $todo)
+                        <tr data-entry-id="{{ $todo->id }}">
                             <td>
 
                             </td>
                             <td>
-                                {{ $minuteData->id ?? '' }}
+                                {{ $todo->id ?? '' }}
                             </td>
                             <td>
-                                @if($minuteData->filename)
-                                    <a href="{{ $minuteData->filename->getUrl() }}" target="_blank">
-                                        {{ trans('global.view_file') }}
-                                    </a>
-                                @endif
+                                <span style="display:none">{{ $todo->complete ?? '' }}</span>
+                                <input type="checkbox" disabled="disabled" {{ $todo->complete ? 'checked' : '' }}>
                             </td>
                             <td>
-                                {{ $minuteData->year_created ?? '' }}
+                                {{ $todo->title ?? '' }}
                             </td>
                             <td>
-                                {{ $minuteData->pdf_text ?? '' }}
+                                {{ $todo->user->name ?? '' }}
                             </td>
                             <td>
-                                @can('minute_data_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.minute-datas.show', $minuteData->id) }}">
+                                @can('todo_show')
+                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.todos.show', $todo->id) }}">
                                         {{ trans('global.view') }}
                                     </a>
                                 @endcan
 
-                                @can('minute_data_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('admin.minute-datas.edit', $minuteData->id) }}">
+                                @can('todo_edit')
+                                    <a class="btn btn-xs btn-info" href="{{ route('admin.todos.edit', $todo->id) }}">
                                         {{ trans('global.edit') }}
                                     </a>
                                 @endcan
 
-                                @can('minute_data_delete')
-                                    <form action="{{ route('admin.minute-datas.destroy', $minuteData->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                @can('todo_delete')
+                                    <form action="{{ route('admin.todos.destroy', $todo->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
@@ -104,11 +101,11 @@
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('minute_data_delete')
+@can('todo_delete')
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
   let deleteButton = {
     text: deleteButtonTrans,
-    url: "{{ route('admin.minute-datas.massDestroy') }}",
+    url: "{{ route('admin.todos.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
@@ -139,7 +136,7 @@
     order: [[ 1, 'desc' ]],
     pageLength: 100,
   });
-  let table = $('.datatable-MinuteData:not(.ajaxTable)').DataTable({ buttons: dtButtons })
+  let table = $('.datatable-Todo:not(.ajaxTable)').DataTable({ buttons: dtButtons })
   $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();

@@ -28,7 +28,7 @@ class StickerController extends Controller
     {
         abort_if(Gate::denies('sticker_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $addresses = Address::get()->pluck('address', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $addresses = Address::pluck('address', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $boats = Boat::pluck('type', 'id')->prepend(trans('global.pleaseSelect'), '');
 
@@ -46,7 +46,7 @@ class StickerController extends Controller
     {
         abort_if(Gate::denies('sticker_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $addresses = Address::get()->pluck('address', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $addresses = Address::pluck('address', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $boats = Boat::pluck('type', 'id')->prepend(trans('global.pleaseSelect'), '');
 
