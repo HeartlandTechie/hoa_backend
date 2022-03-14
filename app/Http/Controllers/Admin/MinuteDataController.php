@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\CsvImportTrait;
 use App\Http\Controllers\Traits\MediaUploadingTrait;
 use App\Http\Requests\MassDestroyMinuteDataRequest;
 use App\Http\Requests\StoreMinuteDataRequest;
@@ -16,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 class MinuteDataController extends Controller
 {
     use MediaUploadingTrait;
+    use CsvImportTrait;
 
     public function index()
     {
